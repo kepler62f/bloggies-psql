@@ -1,0 +1,15 @@
+<h1>Edit Post of <%= current_user.name %></h1>
+
+<%= form_for @editing_post do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title%>
+  <br>
+
+  <%= f.label :content %>
+  <%= f.text_field :content %>
+
+  <!-- Don't need hidden user ID -->
+  <!-- send above along this info when submit -->
+
+  <%= f.submit %>
+<% end %>

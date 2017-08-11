@@ -1,0 +1,46 @@
+<h1>All posts by <%= current_user.name %></h1>
+
+<%#= @news_data['articles'] %>
+
+<h2>News from API</h2>
+<ul>
+  <% @news_data['articles'].each do |article| %>
+    <li>
+        <h3><%= article['title'] %></h3>
+        <p>
+          <%= article['description'] %>
+        </p>
+    </li>
+
+  <% end %>
+
+<ul>
+  <% @all_posts.each_with_index do |post| %>
+    <% if post.id %>
+    <li>
+      <h4><%= post.title %></h4>
+      <p><%= post.content %></p>
+      <%= link_to "View", post_path(post) %>
+      <%= link_to "Edit", edit_post_path(post) %>
+      <%= link_to "Delete", post_path(post), method: :delete %>
+    </li>
+    <% end %>
+  <% end %>
+</ul>
+
+<%= form_for @new_post do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+
+  <br>
+
+  <%= f.label :content %>
+  <%= f.text_field :content %>
+
+  <%= f.hidden_field :user_id %> # send along this info when submit
+
+  <%= f.submit %>
+<% end %>
+
+
+<%#= @all_posts.inspect %>
